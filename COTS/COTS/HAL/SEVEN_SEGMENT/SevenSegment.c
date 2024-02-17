@@ -1,3 +1,9 @@
+/*
+ * SevenSegment.c
+ *
+ * Created: 2/15/2024 3:12:13 AM
+ *  Author: Yousef shabaka
+ */ 
 /**********************************************************************************************************************
  *  FILE DESCRIPTION
  *  -----------------------------------------------------------------------------------------------------------------*/
@@ -12,7 +18,8 @@
 /**********************************************************************************************************************
  *  INCLUDES
  *********************************************************************************************************************/
-#include "LED_Core.h"
+#include "SevenSegment.h"
+
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
 *********************************************************************************************************************/
@@ -24,7 +31,7 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA
  *********************************************************************************************************************/
-
+static const uint8 SevenSegmentValues[10]={0x7E,0x0C,0xB6,0x9E,0xCC,0xDA,0xFA,0x0E,0xFE,0xDE};
 /**********************************************************************************************************************
  *  LOCAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
@@ -37,67 +44,19 @@
  *  GLOBAL FUNCTIONS
  *********************************************************************************************************************/
 
-/******************************************************************************
-* \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)
-* \Description     : Describe this service
-*
-* \Sync\Async      : Synchronous
-* \Reentrancy      : Non Reentrant
-* \Parameters (in) : parameterName   Parameter Describtion
-* \Parameters (out): None
-* \Return value:   : Std_ReturnType  E_OK
-*                                    E_NOT_OK
-*******************************************************************************/
-void LED_init(uint8 led_num)
+
+void SevenSegment_DisplayDigits(uint8 digit)
 {
-	SET_BIT(DIO_PORTC->DDR , led_num);
-}
-/******************************************************************************
-* \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)
-* \Description     : Describe this service
-*
-* \Sync\Async      : Synchronous
-* \Reentrancy      : Non Reentrant
-* \Parameters (in) : parameterName   Parameter Describtion
-* \Parameters (out): None
-* \Return value:   : Std_ReturnType  E_OK
-*                                    E_NOT_OK
-*******************************************************************************/
-void LED_on(uint8 led_num)
-{
-	SET_BIT(DIO_PORTC->PORT , led_num);
-}
-/******************************************************************************
-* \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)
-* \Description     : Describe this service
-*
-* \Sync\Async      : Synchronous
-* \Reentrancy      : Non Reentrant
-* \Parameters (in) : parameterName   Parameter Describtion
-* \Parameters (out): None
-* \Return value:   : Std_ReturnType  E_OK
-*                                    E_NOT_OK
-*******************************************************************************/
-void LED_off(uint8 led_num)
-{
-	CLEAR_BIT(DIO_PORTC->PORT,led_num);
+	SET_BIT(DIO_PORTC->PORT,6);
+	CLEAR_BIT(DIO_PORTC->PORT,7);
+	DIO_PORTA->PORT=SevenSegmentValues[digit%10];
+	_delay_ms(1);
+	CLEAR_BIT(DIO_PORTC->PORT,6);
+	SET_BIT(DIO_PORTC->PORT,7);
+	DIO_PORTA->PORT=SevenSegmentValues[digit/10];
+	_delay_ms(1);
 }
 
-void LED_toggle(uint8 led_num)
-{
-	TOGGLE_BIT(DIO_PORTC->PORT,led_num);
-}
-/******************************************************************************
-* \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)
-* \Description     : Describe this service
-*
-* \Sync\Async      : Synchronous
-* \Reentrancy      : Non Reentrant
-* \Parameters (in) : parameterName   Parameter Describtion
-* \Parameters (out): None
-* \Return value:   : Std_ReturnType  E_OK
-*                                    E_NOT_OK
-*******************************************************************************/
 /******************************************************************************
 * \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)        
 * \Description     : Describe this service                                    

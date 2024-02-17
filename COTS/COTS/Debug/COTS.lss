@@ -3,29 +3,29 @@ COTS.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000024a  00000000  00000000  00000074  2**1
+  0 .text         000001ba  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         0000000a  00800060  0000024a  000002be  2**0
+  1 .data         00000006  00800060  000001ba  0000022e  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  000002c8  2**0
+  2 .comment      00000030  00000000  00000000  00000234  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000002f8  2**2
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000264  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000098  00000000  00000000  00000334  2**0
+  4 .debug_aranges 00000088  00000000  00000000  000002a0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000d10  00000000  00000000  000003cc  2**0
+  5 .debug_info   00000ae7  00000000  00000000  00000328  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000094b  00000000  00000000  000010dc  2**0
+  6 .debug_abbrev 00000737  00000000  00000000  00000e0f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000007a2  00000000  00000000  00001a27  2**0
+  7 .debug_line   000003ab  00000000  00000000  00001546  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  000000c0  00000000  00000000  000021cc  2**2
+  8 .debug_frame  0000008c  00000000  00000000  000018f4  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000047d  00000000  00000000  0000228c  2**0
+  9 .debug_str    0000058c  00000000  00000000  00001980  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000334  00000000  00000000  00002709  2**0
+ 10 .debug_loc    0000024d  00000000  00000000  00001f0c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000058  00000000  00000000  00002a3d  2**0
+ 11 .debug_ranges 00000040  00000000  00000000  00002159  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -65,409 +65,263 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	ea e4       	ldi	r30, 0x4A	; 74
-  68:	f2 e0       	ldi	r31, 0x02	; 2
+  66:	ea eb       	ldi	r30, 0xBA	; 186
+  68:	f1 e0       	ldi	r31, 0x01	; 1
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
-  70:	aa 36       	cpi	r26, 0x6A	; 106
+  70:	a6 36       	cpi	r26, 0x66	; 102
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
-  76:	0e 94 88 00 	call	0x110	; 0x110 <main>
-  7a:	0c 94 23 01 	jmp	0x246	; 0x246 <_exit>
+  76:	0e 94 41 00 	call	0x82	; 0x82 <main>
+  7a:	0c 94 db 00 	jmp	0x1b6	; 0x1b6 <_exit>
 
 0000007e <__bad_interrupt>:
   7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-00000082 <BUTTON_init>:
-* \Return value:   : Std_ReturnType  E_OK
-*                                    E_NOT_OK
-*******************************************************************************/
-void BUTTON_init(uint8 button_num)
+00000082 <main>:
+int main(void)
 {
-	CLEAR_BIT(DIO_PORTD->DDR,button_num);
-  82:	91 b3       	in	r25, 0x11	; 17
-  84:	21 e0       	ldi	r18, 0x01	; 1
-  86:	30 e0       	ldi	r19, 0x00	; 0
-  88:	02 c0       	rjmp	.+4      	; 0x8e <BUTTON_init+0xc>
-  8a:	22 0f       	add	r18, r18
-  8c:	33 1f       	adc	r19, r19
-  8e:	8a 95       	dec	r24
-  90:	e2 f7       	brpl	.-8      	; 0x8a <BUTTON_init+0x8>
-  92:	20 95       	com	r18
-  94:	29 23       	and	r18, r25
-  96:	21 bb       	out	0x11, r18	; 17
-  98:	08 95       	ret
-
-0000009a <BUTTON_GetValue>:
-* \Parameters (out): None
-* \Return value:   : Std_ReturnType  E_OK
-*                                    E_NOT_OK
-*******************************************************************************/
-uint8 BUTTON_GetValue(uint8 button_num)
-{
-  9a:	98 2f       	mov	r25, r24
-	uint8 button_value=0;
-	uint8 Temp_value=0;
-	
-	button_value=GET_BIT(DIO_PORTD->PIN,button_num);
-  9c:	20 b3       	in	r18, 0x10	; 16
-  9e:	30 e0       	ldi	r19, 0x00	; 0
-  a0:	02 c0       	rjmp	.+4      	; 0xa6 <BUTTON_GetValue+0xc>
-  a2:	35 95       	asr	r19
-  a4:	27 95       	ror	r18
-  a6:	8a 95       	dec	r24
-  a8:	e2 f7       	brpl	.-8      	; 0xa2 <BUTTON_GetValue+0x8>
-  aa:	82 2f       	mov	r24, r18
-  ac:	81 70       	andi	r24, 0x01	; 1
-  ae:	41 e0       	ldi	r20, 0x01	; 1
-  b0:	50 e0       	ldi	r21, 0x00	; 0
-  b2:	02 c0       	rjmp	.+4      	; 0xb8 <BUTTON_GetValue+0x1e>
-  b4:	44 0f       	add	r20, r20
-  b6:	55 1f       	adc	r21, r21
-  b8:	9a 95       	dec	r25
-  ba:	e2 f7       	brpl	.-8      	; 0xb4 <BUTTON_GetValue+0x1a>
-	while(Temp_value==0)
-	{
-		Temp_value=GET_BIT(DIO_PORTD->PIN,button_num);
-  bc:	20 b3       	in	r18, 0x10	; 16
-{
-	uint8 button_value=0;
-	uint8 Temp_value=0;
-	
-	button_value=GET_BIT(DIO_PORTD->PIN,button_num);
-	while(Temp_value==0)
-  be:	30 e0       	ldi	r19, 0x00	; 0
-  c0:	24 23       	and	r18, r20
-  c2:	35 23       	and	r19, r21
-  c4:	23 2b       	or	r18, r19
-  c6:	d1 f3       	breq	.-12     	; 0xbc <BUTTON_GetValue+0x22>
-	#else
-		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
-	#endif
-
-	__builtin_avr_delay_cycles(__ticks_dc);
-  c8:	ef e3       	ldi	r30, 0x3F	; 63
-  ca:	fc e9       	ldi	r31, 0x9C	; 156
-  cc:	31 97       	sbiw	r30, 0x01	; 1
-  ce:	f1 f7       	brne	.-4      	; 0xcc <BUTTON_GetValue+0x32>
-  d0:	00 c0       	rjmp	.+0      	; 0xd2 <BUTTON_GetValue+0x38>
-  d2:	00 00       	nop
-		Temp_value=GET_BIT(DIO_PORTD->PIN,button_num);
-	}
-	_delay_ms(10);
-	
-	return button_value;
-}
-  d4:	08 95       	ret
-
-000000d6 <Buzzer_init>:
-/**********************************************************************************************************************
- *  GLOBAL FUNCTIONS
- *********************************************************************************************************************/
-void Buzzer_init(void)
-{
-	SET_BIT(DIO_PORTC->DDR,BUZZER);
-  d6:	a5 9a       	sbi	0x14, 5	; 20
-  d8:	08 95       	ret
-
-000000da <Buzzer_start>:
-
-void Buzzer_start(uint8 clk_times)
-{
-	uint8 i=0;
-	
-	for(i=0;i<clk_times;i++)
-  da:	88 23       	and	r24, r24
-  dc:	c1 f0       	breq	.+48     	; 0x10e <Buzzer_start+0x34>
-  de:	90 e0       	ldi	r25, 0x00	; 0
-	{
-		SET_BIT(DIO_PORTC->PORT,BUZZER);
-  e0:	ad 9a       	sbi	0x15, 5	; 21
-  e2:	2f ef       	ldi	r18, 0xFF	; 255
-  e4:	3d e2       	ldi	r19, 0x2D	; 45
-  e6:	42 e2       	ldi	r20, 0x22	; 34
-  e8:	21 50       	subi	r18, 0x01	; 1
-  ea:	30 40       	sbci	r19, 0x00	; 0
-  ec:	40 40       	sbci	r20, 0x00	; 0
-  ee:	e1 f7       	brne	.-8      	; 0xe8 <Buzzer_start+0xe>
-  f0:	00 c0       	rjmp	.+0      	; 0xf2 <Buzzer_start+0x18>
-  f2:	00 00       	nop
-		_delay_ms(700);
-		CLEAR_BIT(DIO_PORTC->PORT,BUZZER);
-  f4:	ad 98       	cbi	0x15, 5	; 21
-  f6:	2f ef       	ldi	r18, 0xFF	; 255
-  f8:	39 e6       	ldi	r19, 0x69	; 105
-  fa:	48 e1       	ldi	r20, 0x18	; 24
-  fc:	21 50       	subi	r18, 0x01	; 1
-  fe:	30 40       	sbci	r19, 0x00	; 0
- 100:	40 40       	sbci	r20, 0x00	; 0
- 102:	e1 f7       	brne	.-8      	; 0xfc <Buzzer_start+0x22>
- 104:	00 c0       	rjmp	.+0      	; 0x106 <Buzzer_start+0x2c>
- 106:	00 00       	nop
-
-void Buzzer_start(uint8 clk_times)
-{
-	uint8 i=0;
-	
-	for(i=0;i<clk_times;i++)
- 108:	9f 5f       	subi	r25, 0xFF	; 255
- 10a:	89 13       	cpse	r24, r25
- 10c:	e9 cf       	rjmp	.-46     	; 0xe0 <Buzzer_start+0x6>
- 10e:	08 95       	ret
-
-00000110 <main>:
-	uint8 button_value_2=0;
-	uint8 button_value_3=0;
-	uint8 digit=0;
 	
 	
-	BUTTON_init(Button_0);		//  Reset
- 110:	82 e0       	ldi	r24, 0x02	; 2
- 112:	0e 94 41 00 	call	0x82	; 0x82 <BUTTON_init>
-	BUTTON_init(Button_1);		//  Start
- 116:	83 e0       	ldi	r24, 0x03	; 3
- 118:	0e 94 41 00 	call	0x82	; 0x82 <BUTTON_init>
-	BUTTON_init(Button_2);		//  Minutes
- 11c:	84 e0       	ldi	r24, 0x04	; 4
- 11e:	0e 94 41 00 	call	0x82	; 0x82 <BUTTON_init>
-	BUTTON_init(Button_3);		//  Seconds
- 122:	85 e0       	ldi	r24, 0x05	; 5
- 124:	0e 94 41 00 	call	0x82	; 0x82 <BUTTON_init>
-	SevenSegment_init();
- 128:	0e 94 f4 00 	call	0x1e8	; 0x1e8 <SevenSegment_init>
-	Buzzer_init();
- 12c:	0e 94 6b 00 	call	0xd6	; 0xd6 <Buzzer_init>
-{
-	uint8 button_value_0=0;
-	uint8 button_value_1=0;
-	uint8 button_value_2=0;
-	uint8 button_value_3=0;
-	uint8 digit=0;
- 130:	c0 e0       	ldi	r28, 0x00	; 0
-		/**********************************************/
-		button_value_3=BUTTON_GetValue(Button_3);				// Seconds
-		if(button_value_3 == 0 )
-		{
-			if(digit!=95)		digit++;
-			if(digit%10==6)		digit+=4;
- 132:	dd ec       	ldi	r29, 0xCD	; 205
-	SevenSegment_init();
-	Buzzer_init();
 	
+	PORT_Init();
+  82:	0e 94 58 00 	call	0xb0	; 0xb0 <PORT_Init>
+	//SET_BIT(DIO_PORTC->DDR , LED_1 );
     while (1)
 	{
-		SevenSegment_DisplayDigits(digit);
- 134:	8c 2f       	mov	r24, r28
- 136:	0e 94 f9 00 	call	0x1f2	; 0x1f2 <SevenSegment_DisplayDigits>
-		/**********************************************/
-		button_value_3=BUTTON_GetValue(Button_3);				// Seconds
- 13a:	85 e0       	ldi	r24, 0x05	; 5
- 13c:	0e 94 4d 00 	call	0x9a	; 0x9a <BUTTON_GetValue>
-		if(button_value_3 == 0 )
- 140:	81 11       	cpse	r24, r1
- 142:	17 c0       	rjmp	.+46     	; 0x172 <main+0x62>
-		{
-			if(digit!=95)		digit++;
- 144:	cf 35       	cpi	r28, 0x5F	; 95
- 146:	09 f4       	brne	.+2      	; 0x14a <main+0x3a>
- 148:	4b c0       	rjmp	.+150    	; 0x1e0 <main+0xd0>
- 14a:	21 e0       	ldi	r18, 0x01	; 1
- 14c:	2c 0f       	add	r18, r28
-			if(digit%10==6)		digit+=4;
- 14e:	2d 9f       	mul	r18, r29
- 150:	81 2d       	mov	r24, r1
- 152:	11 24       	eor	r1, r1
- 154:	86 95       	lsr	r24
- 156:	86 95       	lsr	r24
- 158:	86 95       	lsr	r24
- 15a:	88 0f       	add	r24, r24
- 15c:	98 2f       	mov	r25, r24
- 15e:	99 0f       	add	r25, r25
- 160:	99 0f       	add	r25, r25
- 162:	89 0f       	add	r24, r25
- 164:	32 2f       	mov	r19, r18
- 166:	38 1b       	sub	r19, r24
- 168:	36 30       	cpi	r19, 0x06	; 6
- 16a:	11 f4       	brne	.+4      	; 0x170 <main+0x60>
- 16c:	cb 5f       	subi	r28, 0xFB	; 251
- 16e:	01 c0       	rjmp	.+2      	; 0x172 <main+0x62>
-		SevenSegment_DisplayDigits(digit);
-		/**********************************************/
-		button_value_3=BUTTON_GetValue(Button_3);				// Seconds
-		if(button_value_3 == 0 )
-		{
-			if(digit!=95)		digit++;
- 170:	c2 2f       	mov	r28, r18
-			if(digit%10==6)		digit+=4;
-		}
-		/**********************************************/
-		button_value_2=BUTTON_GetValue(Button_2);				// Minutes
- 172:	84 e0       	ldi	r24, 0x04	; 4
- 174:	0e 94 4d 00 	call	0x9a	; 0x9a <BUTTON_GetValue>
-		if(button_value_2 == 0 )
- 178:	81 11       	cpse	r24, r1
- 17a:	03 c0       	rjmp	.+6      	; 0x182 <main+0x72>
-		{
-			if( digit<90 )		digit+=10;
- 17c:	ca 35       	cpi	r28, 0x5A	; 90
- 17e:	08 f4       	brcc	.+2      	; 0x182 <main+0x72>
- 180:	c6 5f       	subi	r28, 0xF6	; 246
-		}
-		/**********************************************/
-		button_value_1=BUTTON_GetValue(Button_1);				// Start
- 182:	83 e0       	ldi	r24, 0x03	; 3
- 184:	0e 94 4d 00 	call	0x9a	; 0x9a <BUTTON_GetValue>
-		if(button_value_1 == 0 )
- 188:	81 11       	cpse	r24, r1
- 18a:	23 c0       	rjmp	.+70     	; 0x1d2 <main+0xc2>
-		{
-			while(digit!=0)
- 18c:	cc 23       	and	r28, r28
- 18e:	e9 f0       	breq	.+58     	; 0x1ca <main+0xba>
-			{
-				SevenSegment_DisplayDigits(digit);
- 190:	8c 2f       	mov	r24, r28
- 192:	0e 94 f9 00 	call	0x1f2	; 0x1f2 <SevenSegment_DisplayDigits>
-				if(  (digit%10)==0 )	digit-=4;
- 196:	cd 9f       	mul	r28, r29
- 198:	81 2d       	mov	r24, r1
- 19a:	11 24       	eor	r1, r1
- 19c:	86 95       	lsr	r24
- 19e:	86 95       	lsr	r24
- 1a0:	86 95       	lsr	r24
- 1a2:	88 0f       	add	r24, r24
- 1a4:	98 2f       	mov	r25, r24
- 1a6:	99 0f       	add	r25, r25
- 1a8:	99 0f       	add	r25, r25
- 1aa:	89 0f       	add	r24, r25
- 1ac:	c8 13       	cpse	r28, r24
- 1ae:	01 c0       	rjmp	.+2      	; 0x1b2 <main+0xa2>
- 1b0:	c4 50       	subi	r28, 0x04	; 4
- 1b2:	8a ea       	ldi	r24, 0xAA	; 170
- 1b4:	96 ee       	ldi	r25, 0xE6	; 230
- 1b6:	26 e9       	ldi	r18, 0x96	; 150
- 1b8:	31 e0       	ldi	r19, 0x01	; 1
- 1ba:	81 50       	subi	r24, 0x01	; 1
- 1bc:	90 40       	sbci	r25, 0x00	; 0
- 1be:	20 40       	sbci	r18, 0x00	; 0
- 1c0:	30 40       	sbci	r19, 0x00	; 0
- 1c2:	d9 f7       	brne	.-10     	; 0x1ba <main+0xaa>
- 1c4:	00 00       	nop
-				_delay_ms(10000);
-				digit--;
- 1c6:	c1 50       	subi	r28, 0x01	; 1
-		}
-		/**********************************************/
-		button_value_1=BUTTON_GetValue(Button_1);				// Start
-		if(button_value_1 == 0 )
-		{
-			while(digit!=0)
- 1c8:	19 f7       	brne	.-58     	; 0x190 <main+0x80>
-				SevenSegment_DisplayDigits(digit);
-				if(  (digit%10)==0 )	digit-=4;
-				_delay_ms(10000);
-				digit--;
-			}
-			Buzzer_start(4);
- 1ca:	84 e0       	ldi	r24, 0x04	; 4
- 1cc:	0e 94 6d 00 	call	0xda	; 0xda <Buzzer_start>
- 1d0:	c0 e0       	ldi	r28, 0x00	; 0
-		}
-		/**********************************************/
-		button_value_0=BUTTON_GetValue(Button_0);				// Reset
- 1d2:	82 e0       	ldi	r24, 0x02	; 2
- 1d4:	0e 94 4d 00 	call	0x9a	; 0x9a <BUTTON_GetValue>
-		if(button_value_0 == 0 )
- 1d8:	81 11       	cpse	r24, r1
- 1da:	ac cf       	rjmp	.-168    	; 0x134 <main+0x24>
-		{
-			digit=0;
- 1dc:	c0 e0       	ldi	r28, 0x00	; 0
- 1de:	aa cf       	rjmp	.-172    	; 0x134 <main+0x24>
-		{
-			if(digit!=95)		digit++;
-			if(digit%10==6)		digit+=4;
-		}
-		/**********************************************/
-		button_value_2=BUTTON_GetValue(Button_2);				// Minutes
- 1e0:	84 e0       	ldi	r24, 0x04	; 4
- 1e2:	0e 94 4d 00 	call	0x9a	; 0x9a <BUTTON_GetValue>
- 1e6:	cd cf       	rjmp	.-102    	; 0x182 <main+0x72>
+		LED_on(LED_0);
+  86:	80 e0       	ldi	r24, 0x00	; 0
+  88:	0e 94 4d 00 	call	0x9a	; 0x9a <LED_on>
+		LED_on(LED_1);
+  8c:	81 e0       	ldi	r24, 0x01	; 1
+  8e:	0e 94 4d 00 	call	0x9a	; 0x9a <LED_on>
+		LED_on(LED_2);
+  92:	82 e0       	ldi	r24, 0x02	; 2
+  94:	0e 94 4d 00 	call	0x9a	; 0x9a <LED_on>
+  98:	f6 cf       	rjmp	.-20     	; 0x86 <main+0x4>
 
-000001e8 <SevenSegment_init>:
+0000009a <LED_on>:
+* \Return value:   : Std_ReturnType  E_OK
+*                                    E_NOT_OK
+*******************************************************************************/
+void LED_on(uint8 led_num)
+{
+	SET_BIT(DIO_PORTC->PORT , led_num);
+  9a:	95 b3       	in	r25, 0x15	; 21
+  9c:	21 e0       	ldi	r18, 0x01	; 1
+  9e:	30 e0       	ldi	r19, 0x00	; 0
+  a0:	02 c0       	rjmp	.+4      	; 0xa6 <LED_on+0xc>
+  a2:	22 0f       	add	r18, r18
+  a4:	33 1f       	adc	r19, r19
+  a6:	8a 95       	dec	r24
+  a8:	e2 f7       	brpl	.-8      	; 0xa2 <LED_on+0x8>
+  aa:	29 2b       	or	r18, r25
+  ac:	25 bb       	out	0x15, r18	; 21
+  ae:	08 95       	ret
+
+000000b0 <PORT_Init>:
+
 /**********************************************************************************************************************
  *  GLOBAL FUNCTIONS
  *********************************************************************************************************************/
-void SevenSegment_init(void)
+void PORT_Init(void)
 {
-	DIO_PORTA->DDR=0xFF;
- 1e8:	8f ef       	ldi	r24, 0xFF	; 255
- 1ea:	8a bb       	out	0x1a, r24	; 26
-	SET_BIT(DIO_PORTC->DDR,6);
- 1ec:	a6 9a       	sbi	0x14, 6	; 20
-	SET_BIT(DIO_PORTC->DDR,7);
- 1ee:	a7 9a       	sbi	0x14, 7	; 20
- 1f0:	08 95       	ret
-
-000001f2 <SevenSegment_DisplayDigits>:
+  b0:	e0 e6       	ldi	r30, 0x60	; 96
+  b2:	f0 e0       	ldi	r31, 0x00	; 0
+  b4:	46 e6       	ldi	r20, 0x66	; 102
+  b6:	50 e0       	ldi	r21, 0x00	; 0
+		{
+			case PORT_A :
+			CLEAR_BIT(DIO_PORTA->DDR , Pin );
+			break;
+			case PORT_B :
+			CLEAR_BIT(DIO_PORTB->DDR , Pin );
+  b8:	61 e0       	ldi	r22, 0x01	; 1
+  ba:	70 e0       	ldi	r23, 0x00	; 0
+{
+	uint8 counter=0, Port=0 , Pin=0, Dir=0;
+	
+	for(counter=0;counter<DEFINED_PINS;counter++)
+	{
+		Port = PORT_Init_Pins[counter].pin_order / NUMBER_PORT_PINS ;
+  bc:	80 81       	ld	r24, Z
+  be:	98 2f       	mov	r25, r24
+  c0:	96 95       	lsr	r25
+  c2:	96 95       	lsr	r25
+  c4:	96 95       	lsr	r25
+		Pin = PORT_Init_Pins[counter].pin_order % NUMBER_PORT_PINS ;
+  c6:	87 70       	andi	r24, 0x07	; 7
+		Dir = PORT_Init_Pins[counter].pin_dir ;
+	
+	
+	switch(Dir)
+  c8:	21 81       	ldd	r18, Z+1	; 0x01
+  ca:	22 23       	and	r18, r18
+  cc:	b9 f1       	breq	.+110    	; 0x13c <PORT_Init+0x8c>
+  ce:	21 30       	cpi	r18, 0x01	; 1
+  d0:	09 f0       	breq	.+2      	; 0xd4 <PORT_Init+0x24>
+  d2:	6b c0       	rjmp	.+214    	; 0x1aa <PORT_Init+0xfa>
+	{
+		case OUTPUT :
+		switch(Port)
+  d4:	91 30       	cpi	r25, 0x01	; 1
+  d6:	89 f0       	breq	.+34     	; 0xfa <PORT_Init+0x4a>
+  d8:	28 f0       	brcs	.+10     	; 0xe4 <PORT_Init+0x34>
+  da:	92 30       	cpi	r25, 0x02	; 2
+  dc:	c9 f0       	breq	.+50     	; 0x110 <PORT_Init+0x60>
+  de:	93 30       	cpi	r25, 0x03	; 3
+  e0:	11 f1       	breq	.+68     	; 0x126 <PORT_Init+0x76>
+  e2:	63 c0       	rjmp	.+198    	; 0x1aa <PORT_Init+0xfa>
+		{
+			case PORT_A :
+			SET_BIT(DIO_PORTA->DDR , Pin );
+  e4:	2a b3       	in	r18, 0x1a	; 26
+  e6:	db 01       	movw	r26, r22
+  e8:	02 c0       	rjmp	.+4      	; 0xee <PORT_Init+0x3e>
+  ea:	aa 0f       	add	r26, r26
+  ec:	bb 1f       	adc	r27, r27
+  ee:	8a 95       	dec	r24
+  f0:	e2 f7       	brpl	.-8      	; 0xea <PORT_Init+0x3a>
+  f2:	cd 01       	movw	r24, r26
+  f4:	82 2b       	or	r24, r18
+  f6:	8a bb       	out	0x1a, r24	; 26
+			break;
+  f8:	58 c0       	rjmp	.+176    	; 0x1aa <PORT_Init+0xfa>
+			case PORT_B :
+			SET_BIT(DIO_PORTB->DDR , Pin );
+  fa:	27 b3       	in	r18, 0x17	; 23
+  fc:	db 01       	movw	r26, r22
+  fe:	02 c0       	rjmp	.+4      	; 0x104 <PORT_Init+0x54>
+ 100:	aa 0f       	add	r26, r26
+ 102:	bb 1f       	adc	r27, r27
+ 104:	8a 95       	dec	r24
+ 106:	e2 f7       	brpl	.-8      	; 0x100 <PORT_Init+0x50>
+ 108:	cd 01       	movw	r24, r26
+ 10a:	82 2b       	or	r24, r18
+ 10c:	87 bb       	out	0x17, r24	; 23
+			break;
+ 10e:	4d c0       	rjmp	.+154    	; 0x1aa <PORT_Init+0xfa>
+			case PORT_C :
+			SET_BIT(DIO_PORTC->DDR , Pin );
+ 110:	24 b3       	in	r18, 0x14	; 20
+ 112:	db 01       	movw	r26, r22
+ 114:	02 c0       	rjmp	.+4      	; 0x11a <PORT_Init+0x6a>
+ 116:	aa 0f       	add	r26, r26
+ 118:	bb 1f       	adc	r27, r27
+ 11a:	8a 95       	dec	r24
+ 11c:	e2 f7       	brpl	.-8      	; 0x116 <PORT_Init+0x66>
+ 11e:	cd 01       	movw	r24, r26
+ 120:	82 2b       	or	r24, r18
+ 122:	84 bb       	out	0x14, r24	; 20
+			break;
+ 124:	42 c0       	rjmp	.+132    	; 0x1aa <PORT_Init+0xfa>
+			case PORT_D :
+			SET_BIT(DIO_PORTD->DDR , Pin );
+ 126:	21 b3       	in	r18, 0x11	; 17
+ 128:	db 01       	movw	r26, r22
+ 12a:	02 c0       	rjmp	.+4      	; 0x130 <PORT_Init+0x80>
+ 12c:	aa 0f       	add	r26, r26
+ 12e:	bb 1f       	adc	r27, r27
+ 130:	8a 95       	dec	r24
+ 132:	e2 f7       	brpl	.-8      	; 0x12c <PORT_Init+0x7c>
+ 134:	cd 01       	movw	r24, r26
+ 136:	82 2b       	or	r24, r18
+ 138:	81 bb       	out	0x11, r24	; 17
+			break;
+ 13a:	37 c0       	rjmp	.+110    	; 0x1aa <PORT_Init+0xfa>
+		}
+		break;
+		case INPUT :
+		switch(Port)
+ 13c:	91 30       	cpi	r25, 0x01	; 1
+ 13e:	91 f0       	breq	.+36     	; 0x164 <PORT_Init+0xb4>
+ 140:	28 f0       	brcs	.+10     	; 0x14c <PORT_Init+0x9c>
+ 142:	92 30       	cpi	r25, 0x02	; 2
+ 144:	d9 f0       	breq	.+54     	; 0x17c <PORT_Init+0xcc>
+ 146:	93 30       	cpi	r25, 0x03	; 3
+ 148:	29 f1       	breq	.+74     	; 0x194 <PORT_Init+0xe4>
+ 14a:	2f c0       	rjmp	.+94     	; 0x1aa <PORT_Init+0xfa>
+		{
+			case PORT_A :
+			CLEAR_BIT(DIO_PORTA->DDR , Pin );
+ 14c:	9a b3       	in	r25, 0x1a	; 26
+ 14e:	9b 01       	movw	r18, r22
+ 150:	02 c0       	rjmp	.+4      	; 0x156 <PORT_Init+0xa6>
+ 152:	22 0f       	add	r18, r18
+ 154:	33 1f       	adc	r19, r19
+ 156:	8a 95       	dec	r24
+ 158:	e2 f7       	brpl	.-8      	; 0x152 <PORT_Init+0xa2>
+ 15a:	82 2f       	mov	r24, r18
+ 15c:	80 95       	com	r24
+ 15e:	89 23       	and	r24, r25
+ 160:	8a bb       	out	0x1a, r24	; 26
+			break;
+ 162:	23 c0       	rjmp	.+70     	; 0x1aa <PORT_Init+0xfa>
+			case PORT_B :
+			CLEAR_BIT(DIO_PORTB->DDR , Pin );
+ 164:	97 b3       	in	r25, 0x17	; 23
+ 166:	9b 01       	movw	r18, r22
+ 168:	02 c0       	rjmp	.+4      	; 0x16e <PORT_Init+0xbe>
+ 16a:	22 0f       	add	r18, r18
+ 16c:	33 1f       	adc	r19, r19
+ 16e:	8a 95       	dec	r24
+ 170:	e2 f7       	brpl	.-8      	; 0x16a <PORT_Init+0xba>
+ 172:	82 2f       	mov	r24, r18
+ 174:	80 95       	com	r24
+ 176:	89 23       	and	r24, r25
+ 178:	87 bb       	out	0x17, r24	; 23
+			break;
+ 17a:	17 c0       	rjmp	.+46     	; 0x1aa <PORT_Init+0xfa>
+			case PORT_C :
+			CLEAR_BIT(DIO_PORTC->DDR , Pin );
+ 17c:	94 b3       	in	r25, 0x14	; 20
+ 17e:	9b 01       	movw	r18, r22
+ 180:	02 c0       	rjmp	.+4      	; 0x186 <PORT_Init+0xd6>
+ 182:	22 0f       	add	r18, r18
+ 184:	33 1f       	adc	r19, r19
+ 186:	8a 95       	dec	r24
+ 188:	e2 f7       	brpl	.-8      	; 0x182 <PORT_Init+0xd2>
+ 18a:	82 2f       	mov	r24, r18
+ 18c:	80 95       	com	r24
+ 18e:	89 23       	and	r24, r25
+ 190:	84 bb       	out	0x14, r24	; 20
+			break;
+ 192:	0b c0       	rjmp	.+22     	; 0x1aa <PORT_Init+0xfa>
+			case PORT_D :
+			CLEAR_BIT(DIO_PORTD->DDR , Pin );
+ 194:	91 b3       	in	r25, 0x11	; 17
+ 196:	9b 01       	movw	r18, r22
+ 198:	02 c0       	rjmp	.+4      	; 0x19e <PORT_Init+0xee>
+ 19a:	22 0f       	add	r18, r18
+ 19c:	33 1f       	adc	r19, r19
+ 19e:	8a 95       	dec	r24
+ 1a0:	e2 f7       	brpl	.-8      	; 0x19a <PORT_Init+0xea>
+ 1a2:	82 2f       	mov	r24, r18
+ 1a4:	80 95       	com	r24
+ 1a6:	89 23       	and	r24, r25
+ 1a8:	81 bb       	out	0x11, r24	; 17
+ 1aa:	32 96       	adiw	r30, 0x02	; 2
+ *********************************************************************************************************************/
+void PORT_Init(void)
+{
+	uint8 counter=0, Port=0 , Pin=0, Dir=0;
+	
+	for(counter=0;counter<DEFINED_PINS;counter++)
+ 1ac:	e4 17       	cp	r30, r20
+ 1ae:	f5 07       	cpc	r31, r21
+ 1b0:	09 f0       	breq	.+2      	; 0x1b4 <PORT_Init+0x104>
+ 1b2:	84 cf       	rjmp	.-248    	; 0xbc <PORT_Init+0xc>
+		break;
+		default:
+		break;
+	}
+	}
 }
+ 1b4:	08 95       	ret
 
-void SevenSegment_DisplayDigits(uint8 digit)
-{
-	SET_BIT(DIO_PORTC->PORT,6);
- 1f2:	ae 9a       	sbi	0x15, 6	; 21
-	CLEAR_BIT(DIO_PORTC->PORT,7);
- 1f4:	af 98       	cbi	0x15, 7	; 21
-	DIO_PORTA->PORT=SevenSegmentValues[digit%10];
- 1f6:	ed ec       	ldi	r30, 0xCD	; 205
- 1f8:	8e 9f       	mul	r24, r30
- 1fa:	e1 2d       	mov	r30, r1
- 1fc:	11 24       	eor	r1, r1
- 1fe:	e6 95       	lsr	r30
- 200:	e6 95       	lsr	r30
- 202:	e6 95       	lsr	r30
- 204:	2e 2f       	mov	r18, r30
- 206:	22 0f       	add	r18, r18
- 208:	92 2f       	mov	r25, r18
- 20a:	99 0f       	add	r25, r25
- 20c:	99 0f       	add	r25, r25
- 20e:	92 0f       	add	r25, r18
- 210:	89 1b       	sub	r24, r25
- 212:	a8 2f       	mov	r26, r24
- 214:	b0 e0       	ldi	r27, 0x00	; 0
- 216:	a0 5a       	subi	r26, 0xA0	; 160
- 218:	bf 4f       	sbci	r27, 0xFF	; 255
- 21a:	8c 91       	ld	r24, X
- 21c:	8b bb       	out	0x1b, r24	; 27
- 21e:	8f e9       	ldi	r24, 0x9F	; 159
- 220:	9f e0       	ldi	r25, 0x0F	; 15
- 222:	01 97       	sbiw	r24, 0x01	; 1
- 224:	f1 f7       	brne	.-4      	; 0x222 <SevenSegment_DisplayDigits+0x30>
- 226:	00 c0       	rjmp	.+0      	; 0x228 <SevenSegment_DisplayDigits+0x36>
- 228:	00 00       	nop
-	_delay_ms(1);
-	CLEAR_BIT(DIO_PORTC->PORT,6);
- 22a:	ae 98       	cbi	0x15, 6	; 21
-	SET_BIT(DIO_PORTC->PORT,7);
- 22c:	af 9a       	sbi	0x15, 7	; 21
-	DIO_PORTA->PORT=SevenSegmentValues[digit/10];
- 22e:	f0 e0       	ldi	r31, 0x00	; 0
- 230:	e0 5a       	subi	r30, 0xA0	; 160
- 232:	ff 4f       	sbci	r31, 0xFF	; 255
- 234:	80 81       	ld	r24, Z
- 236:	8b bb       	out	0x1b, r24	; 27
- 238:	8f e9       	ldi	r24, 0x9F	; 159
- 23a:	9f e0       	ldi	r25, 0x0F	; 15
- 23c:	01 97       	sbiw	r24, 0x01	; 1
- 23e:	f1 f7       	brne	.-4      	; 0x23c <SevenSegment_DisplayDigits+0x4a>
- 240:	00 c0       	rjmp	.+0      	; 0x242 <SevenSegment_DisplayDigits+0x50>
- 242:	00 00       	nop
- 244:	08 95       	ret
+000001b6 <_exit>:
+ 1b6:	f8 94       	cli
 
-00000246 <_exit>:
- 246:	f8 94       	cli
-
-00000248 <__stop_program>:
- 248:	ff cf       	rjmp	.-2      	; 0x248 <__stop_program>
+000001b8 <__stop_program>:
+ 1b8:	ff cf       	rjmp	.-2      	; 0x1b8 <__stop_program>

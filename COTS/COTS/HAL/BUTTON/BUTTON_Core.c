@@ -1,7 +1,7 @@
 /*
- * SevenSegment.c
+ * BUTTON_Core.c
  *
- * Created: 2/15/2024 3:12:13 AM
+ * Created: 2/10/2024 10:26:02 PM
  *  Author: Yousef shabaka
  */ 
 /**********************************************************************************************************************
@@ -18,7 +18,7 @@
 /**********************************************************************************************************************
  *  INCLUDES
  *********************************************************************************************************************/
-#include "SevenSegment.h"
+#include "BUTTON_Core.h"
 
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
@@ -31,7 +31,7 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA
  *********************************************************************************************************************/
-static const uint8 SevenSegmentValues[10]={0x7E,0x0C,0xB6,0x9E,0xCC,0xDA,0xFA,0x0E,0xFE,0xDE};
+
 /**********************************************************************************************************************
  *  LOCAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
@@ -43,36 +43,45 @@ static const uint8 SevenSegmentValues[10]={0x7E,0x0C,0xB6,0x9E,0xCC,0xDA,0xFA,0x
 /**********************************************************************************************************************
  *  GLOBAL FUNCTIONS
  *********************************************************************************************************************/
-void SevenSegment_init(void)
-{
-	DIO_PORTA->DDR=0xFF;
-	SET_BIT(DIO_PORTC->DDR,6);
-	SET_BIT(DIO_PORTC->DDR,7);
-}
-
-void SevenSegment_DisplayDigits(uint8 digit)
-{
-	SET_BIT(DIO_PORTC->PORT,6);
-	CLEAR_BIT(DIO_PORTC->PORT,7);
-	DIO_PORTA->PORT=SevenSegmentValues[digit%10];
-	_delay_ms(1);
-	CLEAR_BIT(DIO_PORTC->PORT,6);
-	SET_BIT(DIO_PORTC->PORT,7);
-	DIO_PORTA->PORT=SevenSegmentValues[digit/10];
-	_delay_ms(1);
-}
+/******************************************************************************
+* \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)
+* \Description     : Describe this service
+*
+* \Sync\Async      : Synchronous
+* \Reentrancy      : Non Reentrant
+* \Parameters (in) : parameterName   Parameter Describtion
+* \Parameters (out): None
+* \Return value:   : Std_ReturnType  E_OK
+*                                    E_NOT_OK
+*******************************************************************************/
 
 /******************************************************************************
-* \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)        
-* \Description     : Describe this service                                    
-*                                                                             
-* \Sync\Async      : Synchronous                                               
-* \Reentrancy      : Non Reentrant                                             
-* \Parameters (in) : parameterName   Parameter Describtion                     
-* \Parameters (out): None                                                      
+* \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)
+* \Description     : Describe this service
+*
+* \Sync\Async      : Synchronous
+* \Reentrancy      : Non Reentrant
+* \Parameters (in) : parameterName   Parameter Describtion
+* \Parameters (out): None
 * \Return value:   : Std_ReturnType  E_OK
-*                                    E_NOT_OK                                  
+*                                    E_NOT_OK
 *******************************************************************************/
+uint8 BUTTON_GetValue(uint8 button_num)
+{
+	uint8 button_value=0;
+	uint8 Temp_value=0;
+	
+	button_value=GET_BIT(DIO_PORTD->PIN,button_num);
+	while(Temp_value==0)
+	{
+		Temp_value=GET_BIT(DIO_PORTD->PIN,button_num);
+	}
+	_delay_ms(10);
+	
+	return button_value;
+}
+
+
 
 
 /**********************************************************************************************************************

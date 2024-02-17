@@ -2,13 +2,17 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-BUTTON_Core.c
+APP\Application\main.c
 
-BUZZER_Core.c
+APP\Cfg\PORT_Lcfg.c
 
-LED_Core.c
+HAL\BUTTON\BUTTON_Core.c
 
-main.c
+HAL\BUZZER\BUZZER_Core.c
 
-SevenSegment.c
+HAL\LED\LED_Core.c
+
+HAL\SEVEN_SEGMENT\SevenSegment.c
+
+MCAL\PORT\PORT_Core.c
 
