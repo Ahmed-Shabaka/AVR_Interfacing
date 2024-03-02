@@ -19,57 +19,87 @@ Discarded input sections
  .data          0x00000000        0x0 HAL/BUTTON/BUTTON_Core.o
  .bss           0x00000000        0x0 HAL/BUTTON/BUTTON_Core.o
  .text.BUTTON_GetValue
-                0x00000000       0x3c HAL/BUTTON/BUTTON_Core.o
- .debug_info    0x00000000      0x18f HAL/BUTTON/BUTTON_Core.o
- .debug_abbrev  0x00000000      0x102 HAL/BUTTON/BUTTON_Core.o
- .debug_loc     0x00000000       0xb1 HAL/BUTTON/BUTTON_Core.o
+                0x00000000       0x4e HAL/BUTTON/BUTTON_Core.o
+ .debug_info    0x00000000      0x19e HAL/BUTTON/BUTTON_Core.o
+ .debug_abbrev  0x00000000      0x111 HAL/BUTTON/BUTTON_Core.o
+ .debug_loc     0x00000000       0xc9 HAL/BUTTON/BUTTON_Core.o
  .debug_aranges
                 0x00000000       0x20 HAL/BUTTON/BUTTON_Core.o
  .debug_ranges  0x00000000       0x10 HAL/BUTTON/BUTTON_Core.o
- .debug_line    0x00000000      0x155 HAL/BUTTON/BUTTON_Core.o
- .debug_str     0x00000000      0x237 HAL/BUTTON/BUTTON_Core.o
+ .debug_line    0x00000000      0x172 HAL/BUTTON/BUTTON_Core.o
+ .debug_str     0x00000000      0x239 HAL/BUTTON/BUTTON_Core.o
  .comment       0x00000000       0x31 HAL/BUTTON/BUTTON_Core.o
- .debug_frame   0x00000000       0x24 HAL/BUTTON/BUTTON_Core.o
+ .debug_frame   0x00000000       0x3c HAL/BUTTON/BUTTON_Core.o
  .text          0x00000000        0x0 HAL/BUZZER/BUZZER_Core.o
  .data          0x00000000        0x0 HAL/BUZZER/BUZZER_Core.o
  .bss           0x00000000        0x0 HAL/BUZZER/BUZZER_Core.o
- .text.Buzzer_init
-                0x00000000        0x4 HAL/BUZZER/BUZZER_Core.o
  .text.Buzzer_start
-                0x00000000       0x36 HAL/BUZZER/BUZZER_Core.o
- .debug_info    0x00000000      0x1c7 HAL/BUZZER/BUZZER_Core.o
- .debug_abbrev  0x00000000      0x129 HAL/BUZZER/BUZZER_Core.o
- .debug_loc     0x00000000       0xaf HAL/BUZZER/BUZZER_Core.o
+                0x00000000       0x4c HAL/BUZZER/BUZZER_Core.o
+ .debug_info    0x00000000      0x1cf HAL/BUZZER/BUZZER_Core.o
+ .debug_abbrev  0x00000000      0x127 HAL/BUZZER/BUZZER_Core.o
+ .debug_loc     0x00000000      0x10a HAL/BUZZER/BUZZER_Core.o
  .debug_aranges
-                0x00000000       0x28 HAL/BUZZER/BUZZER_Core.o
- .debug_ranges  0x00000000       0x18 HAL/BUZZER/BUZZER_Core.o
- .debug_line    0x00000000      0x18a HAL/BUZZER/BUZZER_Core.o
- .debug_str     0x00000000      0x227 HAL/BUZZER/BUZZER_Core.o
+                0x00000000       0x20 HAL/BUZZER/BUZZER_Core.o
+ .debug_ranges  0x00000000       0x10 HAL/BUZZER/BUZZER_Core.o
+ .debug_line    0x00000000      0x185 HAL/BUZZER/BUZZER_Core.o
+ .debug_str     0x00000000      0x22f HAL/BUZZER/BUZZER_Core.o
  .comment       0x00000000       0x31 HAL/BUZZER/BUZZER_Core.o
- .debug_frame   0x00000000       0x34 HAL/BUZZER/BUZZER_Core.o
+ .debug_frame   0x00000000       0x30 HAL/BUZZER/BUZZER_Core.o
+ .text          0x00000000        0x0 HAL/KeyPad/KEYPAD_Core.o
+ .data          0x00000000        0x0 HAL/KeyPad/KEYPAD_Core.o
+ .bss           0x00000000        0x0 HAL/KeyPad/KEYPAD_Core.o
+ .text.keyPad_init
+                0x00000000       0x22 HAL/KeyPad/KEYPAD_Core.o
+ .text.KeyPad_GetValue
+                0x00000000       0xa4 HAL/KeyPad/KEYPAD_Core.o
+ .rodata.KEYPAD_VALUES
+                0x00000000       0x10 HAL/KeyPad/KEYPAD_Core.o
+ .debug_info    0x00000000      0x2ce HAL/KeyPad/KEYPAD_Core.o
+ .debug_abbrev  0x00000000      0x15c HAL/KeyPad/KEYPAD_Core.o
+ .debug_loc     0x00000000      0x16b HAL/KeyPad/KEYPAD_Core.o
+ .debug_aranges
+                0x00000000       0x28 HAL/KeyPad/KEYPAD_Core.o
+ .debug_ranges  0x00000000       0x18 HAL/KeyPad/KEYPAD_Core.o
+ .debug_line    0x00000000      0x1dc HAL/KeyPad/KEYPAD_Core.o
+ .debug_str     0x00000000      0x29f HAL/KeyPad/KEYPAD_Core.o
+ .comment       0x00000000       0x31 HAL/KeyPad/KEYPAD_Core.o
+ .debug_frame   0x00000000       0x68 HAL/KeyPad/KEYPAD_Core.o
  .text          0x00000000        0x0 HAL/LED/LED_Core.o
  .data          0x00000000        0x0 HAL/LED/LED_Core.o
  .bss           0x00000000        0x0 HAL/LED/LED_Core.o
- .text.LED_off  0x00000000       0x18 HAL/LED/LED_Core.o
+ .text.LED_off  0x00000000       0x2a HAL/LED/LED_Core.o
  .text.LED_toggle
-                0x00000000       0x16 HAL/LED/LED_Core.o
+                0x00000000       0x24 HAL/LED/LED_Core.o
  .text          0x00000000        0x0 HAL/SEVEN_SEGMENT/SevenSegment.o
  .data          0x00000000        0x0 HAL/SEVEN_SEGMENT/SevenSegment.o
  .bss           0x00000000        0x0 HAL/SEVEN_SEGMENT/SevenSegment.o
  .text.SevenSegment_DisplayDigits
-                0x00000000       0x54 HAL/SEVEN_SEGMENT/SevenSegment.o
+                0x00000000       0x82 HAL/SEVEN_SEGMENT/SevenSegment.o
  .rodata.SevenSegmentValues
                 0x00000000        0xa HAL/SEVEN_SEGMENT/SevenSegment.o
- .debug_info    0x00000000      0x1dc HAL/SEVEN_SEGMENT/SevenSegment.o
- .debug_abbrev  0x00000000      0x12c HAL/SEVEN_SEGMENT/SevenSegment.o
- .debug_loc     0x00000000       0xad HAL/SEVEN_SEGMENT/SevenSegment.o
+ .debug_info    0x00000000      0x257 HAL/SEVEN_SEGMENT/SevenSegment.o
+ .debug_abbrev  0x00000000      0x140 HAL/SEVEN_SEGMENT/SevenSegment.o
+ .debug_loc     0x00000000       0xe7 HAL/SEVEN_SEGMENT/SevenSegment.o
  .debug_aranges
                 0x00000000       0x20 HAL/SEVEN_SEGMENT/SevenSegment.o
  .debug_ranges  0x00000000       0x10 HAL/SEVEN_SEGMENT/SevenSegment.o
- .debug_line    0x00000000      0x171 HAL/SEVEN_SEGMENT/SevenSegment.o
- .debug_str     0x00000000      0x249 HAL/SEVEN_SEGMENT/SevenSegment.o
+ .debug_line    0x00000000      0x185 HAL/SEVEN_SEGMENT/SevenSegment.o
+ .debug_str     0x00000000      0x270 HAL/SEVEN_SEGMENT/SevenSegment.o
  .comment       0x00000000       0x31 HAL/SEVEN_SEGMENT/SevenSegment.o
- .debug_frame   0x00000000       0x24 HAL/SEVEN_SEGMENT/SevenSegment.o
+ .debug_frame   0x00000000       0x30 HAL/SEVEN_SEGMENT/SevenSegment.o
+ .text          0x00000000        0x0 MCAL/DIO/DIO_Core.o
+ .data          0x00000000        0x0 MCAL/DIO/DIO_Core.o
+ .bss           0x00000000        0x0 MCAL/DIO/DIO_Core.o
+ .text.DIO_ReadChannel
+                0x00000000       0x8a MCAL/DIO/DIO_Core.o
+ .text.DIO_FlipChannel
+                0x00000000       0x82 MCAL/DIO/DIO_Core.o
+ .text.DIO_SetPullup
+                0x00000000       0x82 MCAL/DIO/DIO_Core.o
+ .text.DIO_WritePortValue
+                0x00000000       0x26 MCAL/DIO/DIO_Core.o
+ .text.DIO_ReadPortValue
+                0x00000000       0x30 MCAL/DIO/DIO_Core.o
  .text          0x00000000        0x0 MCAL/PORT/PORT_Core.o
  .data          0x00000000        0x0 MCAL/PORT/PORT_Core.o
  .bss           0x00000000        0x0 MCAL/PORT/PORT_Core.o
@@ -125,8 +155,10 @@ LOAD APP/Application/main.o
 LOAD APP/Cfg/PORT_Lcfg.o
 LOAD HAL/BUTTON/BUTTON_Core.o
 LOAD HAL/BUZZER/BUZZER_Core.o
+LOAD HAL/KeyPad/KEYPAD_Core.o
 LOAD HAL/LED/LED_Core.o
 LOAD HAL/SEVEN_SEGMENT/SevenSegment.o
+LOAD MCAL/DIO/DIO_Core.o
 LOAD MCAL/PORT/PORT_Core.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a
@@ -235,7 +267,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x1ba
+.text           0x00000000      0x2d2
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -317,16 +349,19 @@ END GROUP
  *(.text.*)
  .text.main     0x00000082       0x18 APP/Application/main.o
                 0x00000082                main
- .text.LED_on   0x0000009a       0x16 HAL/LED/LED_Core.o
+ .text.LED_on   0x0000009a       0x2a HAL/LED/LED_Core.o
                 0x0000009a                LED_on
+ .text.DIO_WriteChannel
+                0x000000c4      0x104 MCAL/DIO/DIO_Core.o
+                0x000000c4                DIO_WriteChannel
  .text.PORT_Init
-                0x000000b0      0x106 MCAL/PORT/PORT_Core.o
-                0x000000b0                PORT_Init
-                0x000001b6                . = ALIGN (0x2)
+                0x000001c8      0x106 MCAL/PORT/PORT_Core.o
+                0x000001c8                PORT_Init
+                0x000002ce                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000001b6        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000001b6                _exit
-                0x000001b6                exit
+ .fini9         0x000002ce        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x000002ce                _exit
+                0x000002ce                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -345,11 +380,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000001b6        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x000002ce        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000001ba                _etext = .
+                0x000002d2                _etext = .
 
-.data           0x00800060        0x6 load address 0x000001ba
+.data           0x00800060        0x6 load address 0x000002d2
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -370,8 +405,8 @@ END GROUP
  *(.bss*)
  *(COMMON)
                 [!provide]                PROVIDE (__bss_end, .)
-                0x000001ba                __data_load_start = LOADADDR (.data)
-                0x000001c0                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000002d2                __data_load_start = LOADADDR (.data)
+                0x000002d8                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800066        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -423,6 +458,7 @@ END GROUP
                                  0x31 (size before relaxing)
  .comment       0x00000030       0x31 APP/Cfg/PORT_Lcfg.o
  .comment       0x00000030       0x31 HAL/LED/LED_Core.o
+ .comment       0x00000030       0x31 MCAL/DIO/DIO_Core.o
  .comment       0x00000030       0x31 MCAL/PORT/PORT_Core.o
 
 .note.gnu.avr.deviceinfo
@@ -445,7 +481,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0x88
+.debug_aranges  0x00000000       0xd0
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x20 APP/Application/main.o
@@ -454,56 +490,66 @@ END GROUP
  .debug_aranges
                 0x00000038       0x30 HAL/LED/LED_Core.o
  .debug_aranges
-                0x00000068       0x20 MCAL/PORT/PORT_Core.o
+                0x00000068       0x48 MCAL/DIO/DIO_Core.o
+ .debug_aranges
+                0x000000b0       0x20 MCAL/PORT/PORT_Core.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xae7
+.debug_info     0x00000000      0xe24
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_info    0x000004e6      0x108 APP/Application/main.o
  .debug_info    0x000005ee      0x17a APP/Cfg/PORT_Lcfg.o
- .debug_info    0x00000768      0x126 HAL/LED/LED_Core.o
- .debug_info    0x0000088e      0x259 MCAL/PORT/PORT_Core.o
+ .debug_info    0x00000768      0x1e2 HAL/LED/LED_Core.o
+ .debug_info    0x0000094a      0x281 MCAL/DIO/DIO_Core.o
+ .debug_info    0x00000bcb      0x259 MCAL/PORT/PORT_Core.o
 
-.debug_abbrev   0x00000000      0x737
+.debug_abbrev   0x00000000      0x835
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_abbrev  0x000004a3       0x99 APP/Application/main.o
  .debug_abbrev  0x0000053c       0x7f APP/Cfg/PORT_Lcfg.o
- .debug_abbrev  0x000005bb       0xa5 HAL/LED/LED_Core.o
- .debug_abbrev  0x00000660       0xd7 MCAL/PORT/PORT_Core.o
+ .debug_abbrev  0x000005bb       0xb0 HAL/LED/LED_Core.o
+ .debug_abbrev  0x0000066b       0xf3 MCAL/DIO/DIO_Core.o
+ .debug_abbrev  0x0000075e       0xd7 MCAL/PORT/PORT_Core.o
 
-.debug_line     0x00000000      0x3ab
+.debug_line     0x00000000      0x639
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x115 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000115       0xb0 APP/Application/main.o
  .debug_line    0x000001c5       0x43 APP/Cfg/PORT_Lcfg.o
- .debug_line    0x00000208       0x96 HAL/LED/LED_Core.o
- .debug_line    0x0000029e      0x10d MCAL/PORT/PORT_Core.o
+ .debug_line    0x00000208       0xfc HAL/LED/LED_Core.o
+ .debug_line    0x00000304      0x228 MCAL/DIO/DIO_Core.o
+ .debug_line    0x0000052c      0x10d MCAL/PORT/PORT_Core.o
 
-.debug_frame    0x00000000       0x8c
+.debug_frame    0x00000000      0x100
  *(.debug_frame)
  .debug_frame   0x00000000       0x24 APP/Application/main.o
  .debug_frame   0x00000024       0x44 HAL/LED/LED_Core.o
- .debug_frame   0x00000068       0x24 MCAL/PORT/PORT_Core.o
+ .debug_frame   0x00000068       0x74 MCAL/DIO/DIO_Core.o
+ .debug_frame   0x000000dc       0x24 MCAL/PORT/PORT_Core.o
 
-.debug_str      0x00000000      0x58c
+.debug_str      0x00000000      0x632
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_str     0x00000196      0x18d APP/Application/main.o
                                 0x1c6 (size before relaxing)
  .debug_str     0x00000323      0x204 APP/Cfg/PORT_Lcfg.o
                                 0x30c (size before relaxing)
- .debug_str     0x00000527       0x3f HAL/LED/LED_Core.o
-                                0x19c (size before relaxing)
- .debug_str     0x00000566       0x26 MCAL/PORT/PORT_Core.o
+ .debug_str     0x00000527       0x63 HAL/LED/LED_Core.o
+                                0x1c0 (size before relaxing)
+ .debug_str     0x0000058a       0x82 MCAL/DIO/DIO_Core.o
+                                0x210 (size before relaxing)
+ .debug_str     0x0000060c       0x26 MCAL/PORT/PORT_Core.o
                                 0x381 (size before relaxing)
 
-.debug_loc      0x00000000      0x24d
+.debug_loc      0x00000000      0x7f6
  *(.debug_loc)
- .debug_loc     0x00000000      0x24d MCAL/PORT/PORT_Core.o
+ .debug_loc     0x00000000       0xf9 HAL/LED/LED_Core.o
+ .debug_loc     0x000000f9      0x4b0 MCAL/DIO/DIO_Core.o
+ .debug_loc     0x000005a9      0x24d MCAL/PORT/PORT_Core.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -523,11 +569,12 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0x40
+.debug_ranges   0x00000000       0x78
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x10 APP/Application/main.o
  .debug_ranges  0x00000010       0x20 HAL/LED/LED_Core.o
- .debug_ranges  0x00000030       0x10 MCAL/PORT/PORT_Core.o
+ .debug_ranges  0x00000030       0x38 MCAL/DIO/DIO_Core.o
+ .debug_ranges  0x00000068       0x10 MCAL/PORT/PORT_Core.o
 
 .debug_macro
  *(.debug_macro)

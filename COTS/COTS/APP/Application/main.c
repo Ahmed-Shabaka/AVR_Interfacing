@@ -23,7 +23,7 @@ int main(void)
 	
 	
 	PORT_Init();
-	//SET_BIT(DIO_PORTC->DDR , LED_1 );
+	
     while (1)
 	{
 		LED_on(LED_0);

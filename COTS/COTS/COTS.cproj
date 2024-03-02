@@ -107,6 +107,7 @@
       <Value>../HAL/BUTTON</Value>
       <Value>../HAL/BUZZER</Value>
       <Value>../HAL/SEVEN_SEGMENT</Value>
+      <Value>../MCAL/DIO</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -132,6 +133,9 @@
     <Compile Include="APP\Application\main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="APP\Cfg\KeyPad_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="APP\Cfg\PORT_Lcfg.c">
       <SubType>compile</SubType>
     </Compile>
@@ -148,6 +152,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="HAL\BUZZER\BUZZER_Core.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\KeyPad\KEYPAD_Core.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\KeyPad\KEYPAD_Core.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="HAL\LED\LED_Core.c">
@@ -171,6 +181,12 @@
     <Compile Include="LIB\STD.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCAL\DIO\DIO_Core.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\DIO\DIO_Core.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="MCAL\PORT\PORT_Core.c">
       <SubType>compile</SubType>
     </Compile>
@@ -184,11 +200,13 @@
     <Folder Include="HAL\LED" />
     <Folder Include="HAL\BUTTON" />
     <Folder Include="HAL\BUZZER" />
+    <Folder Include="HAL\KeyPad" />
     <Folder Include="HAL\SEVEN_SEGMENT" />
     <Folder Include="LIB" />
     <Folder Include="MCAL" />
     <Folder Include="HAL" />
     <Folder Include="APP" />
+    <Folder Include="MCAL\DIO" />
     <Folder Include="MCAL\PORT" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />

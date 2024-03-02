@@ -19,6 +19,7 @@
  *  INCLUDES
  *********************************************************************************************************************/
 #include "SevenSegment.h"
+#include "DIO_Core.h"
 
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
@@ -47,13 +48,13 @@ static const uint8 SevenSegmentValues[10]={0x7E,0x0C,0xB6,0x9E,0xCC,0xDA,0xFA,0x
 
 void SevenSegment_DisplayDigits(uint8 digit)
 {
-	SET_BIT(DIO_PORTC->PORT,6);
-	CLEAR_BIT(DIO_PORTC->PORT,7);
-	DIO_PORTA->PORT=SevenSegmentValues[digit%10];
+	DIO_WriteChannel(PORTC_PIN_6,PIN_HIGH);
+	DIO_WriteChannel(PORTC_PIN_7,PIN_LOW);
+	DIO_WritePortValue(DIO_PORT_A,SevenSegmentValues[digit%10]);
 	_delay_ms(1);
-	CLEAR_BIT(DIO_PORTC->PORT,6);
-	SET_BIT(DIO_PORTC->PORT,7);
-	DIO_PORTA->PORT=SevenSegmentValues[digit/10];
+	DIO_WriteChannel(PORTC_PIN_6,PIN_LOW);
+	DIO_WriteChannel(PORTC_PIN_7,PIN_HIGH);
+	DIO_WritePortValue(DIO_PORT_A,SevenSegmentValues[digit/10]);
 	_delay_ms(1);
 }
 

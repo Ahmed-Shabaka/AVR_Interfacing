@@ -1,7 +1,7 @@
 /*
- * BUTTON_Core.c
+ * KEYPAD_Core.c
  *
- * Created: 2/10/2024 10:26:02 PM
+ * Created: 3/1/2024 11:18:15 PM
  *  Author: Yousef shabaka
  */ 
 /**********************************************************************************************************************
@@ -18,17 +18,22 @@
 /**********************************************************************************************************************
  *  INCLUDES
  *********************************************************************************************************************/
-#include "BUTTON_Core.h"
-#include "DIO_Core.h"
+#include "KEYPAD_Core.h"
 
+#define F_CPU	16000000U
+#include <util/delay.h>
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
 *********************************************************************************************************************/
 
+
 /**********************************************************************************************************************
  *  LOCAL DATA 
  *********************************************************************************************************************/
-
+const static uint8 KEYPAD_VALUES[4][4]={{'1','2','3','+'},
+										{'4','5','6','-'},
+										{'7','8','9','*'},
+										{'=','0','c','/'}};
 /**********************************************************************************************************************
  *  GLOBAL DATA
  *********************************************************************************************************************/
@@ -44,46 +49,55 @@
 /**********************************************************************************************************************
  *  GLOBAL FUNCTIONS
  *********************************************************************************************************************/
-/******************************************************************************
-* \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)
-* \Description     : Describe this service
-*
-* \Sync\Async      : Synchronous
-* \Reentrancy      : Non Reentrant
-* \Parameters (in) : parameterName   Parameter Describtion
-* \Parameters (out): None
-* \Return value:   : Std_ReturnType  E_OK
-*                                    E_NOT_OK
-*******************************************************************************/
+
 
 /******************************************************************************
-* \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)
-* \Description     : Describe this service
-*
-* \Sync\Async      : Synchronous
-* \Reentrancy      : Non Reentrant
-* \Parameters (in) : parameterName   Parameter Describtion
-* \Parameters (out): None
+* \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)        
+* \Description     : Describe this service                                    
+*                                                                             
+* \Sync\Async      : Synchronous                                               
+* \Reentrancy      : Non Reentrant                                             
+* \Parameters (in) : parameterName   Parameter Describtion                     
+* \Parameters (out): None                                                      
 * \Return value:   : Std_ReturnType  E_OK
-*                                    E_NOT_OK
+*                                    E_NOT_OK                                  
 *******************************************************************************/
-uint8 BUTTON_GetValue(uint8 button_num)
+void keyPad_init(void)
 {
-	uint8 button_value=0;
-	uint8 Temp_value=0;
-	
-	DIO_ReadChannel(button_num,&button_value);
-	while(Temp_value==0)
-	{
-		DIO_ReadChannel(button_num,&Temp_value);
-	}
-	_delay_ms(10);
-	
-	return button_value;
+	DIO_WriteChannel(KEYPAD_ROW_0,PIN_HIGH);
+	DIO_WriteChannel(KEYPAD_ROW_1,PIN_HIGH);
+	DIO_WriteChannel(KEYPAD_ROW_2,PIN_HIGH);
+	DIO_WriteChannel(KEYPAD_ROW_3,PIN_HIGH);
 }
 
-
-
+uint8 KeyPad_GetValue(void)
+{
+	uint8 Col_loc=0,Row_loc=0,Button_Value =0,Temp=2;
+	
+	for(Row_loc=ROW_INIT;Row_loc<=ROW_FINAL;Row_loc++)
+	{
+		DIO_WriteChannel(Row_loc,PIN_LOW);
+		
+		for(Col_loc=COL_INIT;Col_loc<=COL_FINAL;Col_loc++)
+		{
+			DIO_ReadChannel(Col_loc,&Temp);
+			
+			if(Temp == KEYPAD_PRESSED)
+			{
+				Button_Value= KEYPAD_VALUES[Row_loc-ROW_INIT][Col_loc-COL_INIT];
+				
+				while(Temp==KEYPAD_PRESSED)
+				{
+					DIO_ReadChannel(Col_loc,&Temp);
+				}
+				_delay_ms(10);
+			}
+		}
+		DIO_WriteChannel(Row_loc,PIN_HIGH);
+	}
+	
+	return Button_Value;
+}
 
 /**********************************************************************************************************************
  *  END OF FILE: 
